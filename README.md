@@ -1,5 +1,5 @@
 # SwiftUI Game
-A little arcade game that uses SwiftUI as a game engine.
+A little arcade game that uses SwiftUI as a game engine :)
  
 <p align="center">
     <img src="https://img.shields.io/badge/platforms-iOS_14_-blue.svg" alt="iPadOS" />
