@@ -1,6 +1,8 @@
 
+
 import PlaygroundSupport
 import SwiftUI
+import Combine
 
 struct framePreferenceKey: PreferenceKey {
     static var defaultValue = CGRect()
@@ -161,6 +163,17 @@ struct GameView: View {
         var time : Double = 1
     }
     
+    init (refreshRate: Double){
+        self.refreshInterval = 1 / refreshRate
+        self.timer = Timer.publish(every: refreshInterval, tolerance: 0, on: .current, in: .common).autoconnect()
+        
+        self.speed = CGFloat(refreshInterval * 10)
+        self.enemySpeed = CGFloat(refreshInterval * 200)
+        self.tailFadeSpeed = Double(refreshInterval * 10)
+        self.foodAngleSpeedDefault = Double(refreshInterval * 3)
+        
+    }
+    
     func newEnemy() {
         
         var speed = CGSize(width: enemySpeed, height: 0)
@@ -174,8 +187,8 @@ struct GameView: View {
     
     func newPosition(_ maxOffset: CGSize) -> CGSize {
         
-        var x: CGFloat = 0
-        var y: CGFloat = 0
+        var x: CGFloat = coords.width
+        var y: CGFloat = coords.height
         
         while (CGSize(width: x, height: y) - coords).length() < gameObjRadius*5 {
             x = CGFloat.random(in: -maxOffset.width...maxOffset.width)
@@ -199,25 +212,27 @@ struct GameView: View {
         newFood = true
     }
     
-    var timer = Timer.publish(every: 0.005, tolerance: 0, on: .current, in: .common).autoconnect()
+    let refreshInterval: Double
+    
+    var timer: Publishers.Autoconnect<Timer.TimerPublisher>
     
     let tailCount = 5
     let tailSize = 20
-    let tailFadeSpeed = 0.05
+    let tailFadeSpeed : Double
     let tailFluctuation : CGFloat = 10
     let tailTransparency : Double = 0.5
     
     let joystickRadius : CGFloat = 100
     
-    let speed : CGFloat = 0.05
+    let speed : CGFloat 
     let jetPower : CGFloat = 0.02
     
-    let enemySpeed : CGFloat = 1.5
+    let enemySpeed : CGFloat 
     let enemySpeedRND : CGFloat = 0.5
     let enemyCount = 3
     
     let foodTime : CFAbsoluteTime = 3
-    let foodAngleSpeedDefault = 0.01
+    let foodAngleSpeedDefault : Double
     
     let gameObjRadius : CGFloat = 30
     
@@ -332,7 +347,7 @@ struct GameView: View {
                                     foodSize *= 0.999
                                 }else{
                                     if foodAngleSpeed > foodAngleSpeedDefault{
-                                        foodAngleSpeed /= 1.02 
+                                        foodAngleSpeed /= 1.02
                                     }
                                 }
                                 
@@ -559,4 +574,4 @@ struct GameView: View {
     }
 }
 
-PlaygroundPage.current.setLiveView(GameView())
+PlaygroundPage.current.setLiveView(GameView(refreshRate: 120))
