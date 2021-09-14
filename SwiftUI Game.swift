@@ -382,7 +382,7 @@ struct GameView: View {
                         }
                             .frame(width: gameObjRadius*2.5, height: gameObjRadius*2.5)
                             .offset(enemies[id].coords)
-                            //Enemie logic
+                            //Enemy logic
                             .onReceive(timer){time in
                                 if deathEnemy > -1 {return }
                                 var enemy = enemies[id]
