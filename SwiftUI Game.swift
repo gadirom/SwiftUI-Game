@@ -18,20 +18,16 @@ extension CGSize{
     }
     
     mutating func rotate(_ a: CGFloat) {
-        
         let x = width * cos(a) - height * sin(a)
         let y = width * sin(a) + height * cos(a)
         
-        self = CGSize(width: x, height: y)
-        
+        self = CGSize(width: x, height: y) 
     }
     
     mutating func randomizeAngle(_ rnd: CGFloat) {
-        
         let a = CGFloat.random(in: -rnd...rnd)
         
         self.rotate(a)
-        
     }
     
     static func +=(lhs: inout CGSize, rhs: CGSize) {
@@ -64,7 +60,6 @@ extension CGSize{
         CGSize(width: lhs.width + rhs,
                height: lhs.height + rhs)
     }
-    
 }
 
 struct JoystickView: View {
@@ -74,7 +69,6 @@ struct JoystickView: View {
         self._offset = offset
         self._isTapped = isTapped
         self.maxRadius = maxRadius
-        
     }
     
     let maxRadius : CGFloat
