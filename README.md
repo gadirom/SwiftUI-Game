@@ -22,5 +22,5 @@ For some reason the code will not run in an Xcode Playgroud. I've created an iss
 
 This isn't the most beautiful Swift code. I made it just for fun and to learn a couple of things about SwiftUI.
 I think a videogame is a good crash test for any UI framework :)
-All the game logic (as well as almost all the animations) are done manually by changing `@State` vars in `onReceive` callbacks from the `Timer`.
+All the game logic (as well as almost all the animations) is done manually by changing `@State` vars in `onReceive` callbacks from the `Timer`.
 Sometimes you may see glitches that are most likely caused by imperfect threading.
