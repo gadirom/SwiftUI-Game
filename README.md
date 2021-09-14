@@ -17,3 +17,10 @@ Just copy the code into the Blank playgroundbook in Swift Playgrounds app on iPa
 Do not forget to turn off Enable Results in the settings of the playgroundbook, otherwise the game will not run.
 
 For some reason the code will not run in an Xcode Playgroud. I've created an issue.
+
+## Notes
+
+This isn't the most beautiful Swift code. I made it just for fun and to learn a couple of things about SwiftUI.
+I think a videogame is a good crash test for any UI framework :)
+All the game logic (as well as almost all the animations) are done manually by changing `@State` vars in `onReceive` callbacks from the `Timer`.
+Sometimes you may see glitches that are most likely caused by imperfect threading.
